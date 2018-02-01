@@ -10,7 +10,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Respinar\Carpets;
+namespace Respinar\Carpets\Frontend\Module;
 
 use Respinar\Carpets\Model\CarpetsModel;
 use Respinar\Carpets\Model\CarpetsCategoryModel;

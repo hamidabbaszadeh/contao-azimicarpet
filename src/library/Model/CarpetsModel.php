@@ -14,7 +14,7 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace Respinar\Carpets;
+namespace Respinar\Carpets\Model;
 
 
 /**
