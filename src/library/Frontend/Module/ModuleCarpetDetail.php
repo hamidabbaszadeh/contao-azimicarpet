@@ -79,7 +79,7 @@ class ModuleCarpetDetail extends ModuleCarpet
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objCarpet = \CarpetsModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->carpet_categories);
+		$objCarpet = CarpetsModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->carpet_categories);
 
 		// Overwrite the page title
 		if ($objCarpet->title != '')

@@ -43,7 +43,7 @@ abstract class ModuleCarpet extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objCategory = \CarpetsCategoryModel::findMultipleByIds($arrCategories);
+		$objCategory = CarpetsCategoryModel::findMultipleByIds($arrCategories);
 		$arrCategories = array();
 
 		if ($objCategory !== null)

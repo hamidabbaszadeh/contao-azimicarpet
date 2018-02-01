@@ -98,7 +98,7 @@ class ModuleCarpetList extends ModuleCarpet
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyCategory'];
 
 
-		$intTotal = \CarpetsModel::countPublishedByPids($this->carpet_categories,$this->carpet_status);
+		$intTotal = CarpetsModel::countPublishedByPids($this->carpet_categories,$this->carpet_status);
 
 		if ($intTotal < 1)
 		{
@@ -183,9 +183,9 @@ class ModuleCarpetList extends ModuleCarpet
 		// Get the items
 		if (isset($limit))
 		{
-			$objCarpets = \CarpetsModel::findPublishedByPids($this->carpet_categories, $limit, $offset, $this->carpet_status,$arrOptions);
+			$objCarpets = CarpetsModel::findPublishedByPids($this->carpet_categories, $limit, $offset, $this->carpet_status,$arrOptions);
 		} else {
-			$objCarpets = \CarpetsModel::findPublishedByPids($this->carpet_categories, 0, $offset, $this->carpet_status,$arrOptions);
+			$objCarpets = CarpetsModel::findPublishedByPids($this->carpet_categories, 0, $offset, $this->carpet_status,$arrOptions);
 		}
 
 

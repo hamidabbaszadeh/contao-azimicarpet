@@ -117,7 +117,7 @@ class ModuleCarpetCarousel extends ModuleCarpet
 			}
 		}
 
-		$objCarpets = \CarpetsModel::findPublishedByPids($this->carpet_categories, $this->numberOfItems, 0, $this->carpet_status,$arrOptions);
+		$objCarpets = CarpetsModel::findPublishedByPids($this->carpet_categories, $this->numberOfItems, 0, $this->carpet_status,$arrOptions);
 
 		// Add the Carpets
 		if ($objCarpets !== null)
