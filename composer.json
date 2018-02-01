@@ -4,7 +4,7 @@
     "keywords": ["contao", "carpet"],
     "type": "contao-module",
     "homepage": "https://github.com/hamidabbaszadeh/contao-azimicarpet",
-    "license": "LGPL-3.0+",
+    "license": "LGPL-3.0-or-later",
     "authors": [
         {
             "name": "Hamid Abbaszadeh",
