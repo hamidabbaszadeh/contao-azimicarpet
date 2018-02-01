@@ -34,14 +34,21 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 (
 	'carpets' => array
 	(
-		'carpet_list'      => 'ModuleCarpetList',
-		'carpet_detail'    => 'ModuleCarpetDetail',
-		'carpet_carousel'  => 'ModuleCarpetCarousel'
+		'carpet_list'      => 'Respinar\Carpets\Frontend\Module\ModuleCarpetList',
+		'carpet_detail'    => 'Respinar\Carpets\Frontend\Module\ModuleCarpetDetail',
+		'carpet_carousel'  => 'Respinar\Carpets\Frontend\Module\ModuleCarpetCarousel'
 	)
 ));
+
+/**
+ * Register models
+ */
+
+$GLOBALS['TL_MODELS']['tl_carpets']          = 'Respinar\Carpets\Model\ProductModel';
+$GLOBALS['TL_MODELS']['tl_carpets_category'] = 'Respinar\Carpets\Model\ProductCategoryModel'; 
 
 
 /**
  * Register hook to add carpets items to the indexer
  */
-$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Carpets', 'getSearchablePages');
+$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Respinar\Carpets\Carpets', 'getSearchablePages');
