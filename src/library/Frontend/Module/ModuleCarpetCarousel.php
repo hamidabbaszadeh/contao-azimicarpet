@@ -21,7 +21,7 @@ use Respinar\Carpets\Model\CarpetsCategoryModel;
  * Front end module "carpet carousel".
  */
 
-class ModuleCarpetCarousel extends \ModuleCarpet
+class ModuleCarpetCarousel extends ModuleCarpet
 {
 
 	/**

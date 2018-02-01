@@ -20,7 +20,7 @@ use Respinar\Carpets\Model\CarpetsCategoryModel;
  *
  * Front end module "carpet deatil".
  */
-class ModuleCarpetDetail extends \ModuleCarpet
+class ModuleCarpetDetail extends ModuleCarpet
 {
 
 	/**

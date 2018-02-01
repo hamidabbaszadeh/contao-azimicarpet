@@ -21,7 +21,7 @@ use Respinar\Carpets\Model\CarpetsCategoryModel;
  * Front end module "carpet list".
  */
 
-class ModuleCarpetList extends \ModuleCarpet
+class ModuleCarpetList extends ModuleCarpet
 {
 
 	/**
