@@ -1,4 +1,4 @@
-<div class="block carpet <?= $this->class; ?>">
+<div class="block carpet_short <?= $this->class; ?>">
 
   <figure class="image_container"<?php if ($this->margin): ?> style="<?= $this->margin; ?>"<?php endif; ?>>
 

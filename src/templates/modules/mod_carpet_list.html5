@@ -6,7 +6,7 @@
   <?php if (empty($this->carpets)): ?>
     <p class="empty"><?php echo $this->empty; ?></p>
   <?php else: ?>
-    <div class="carpet_list">
+    <div class="carpet_list <?= $this->carpetList_Class ?>">
     <?= implode('', $this->carpets); ?>
     </div>
     <?= $this->pagination; ?>

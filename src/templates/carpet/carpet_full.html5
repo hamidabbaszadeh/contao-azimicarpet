@@ -1,5 +1,5 @@
 
-<div class="layout_full block carpet <?= $this->class; ?>">
+<div class="carpet_full <?= $this->class; ?>">
 
   <h2><?= $this->title; ?></h2>
 

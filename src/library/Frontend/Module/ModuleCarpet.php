@@ -88,7 +88,7 @@ abstract class ModuleCarpet extends \Module
 		$objTemplate = new \FrontendTemplate($this->carpet_template);
 		$objTemplate->setData($objCarpet->row());
 
-		$objTemplate->class = (($this->itemClass != '') ? ' ' . $this->itemClass : '') . $strClass;
+		$objTemplate->class = (($this->carpet_Class != '') ? ' ' . $this->carpet_Class : '') . $strClass;
 
 		if (time() - $objCarpet->date < 2592000)
 			$objTemplate->new = true;
@@ -122,7 +122,7 @@ abstract class ModuleCarpet extends \Module
 					$objCarpet->price = $objCarpet->price / 10;
 			}
 
-			$objTemplate->price = number_format($objCarpet->price);		
+			$objTemplate->price = number_format($objCarpet->price);
 			$objTemplate->show_price = $this->carpet_price;
 
 			$objTemplate->currency_string = $GLOBALS['TL_LANG']['MSC'][$this->currency];
@@ -185,11 +185,6 @@ abstract class ModuleCarpet extends \Module
 	{
 		$limit = $objCarpets->count();
 
-		$carpet_perRow = $this->carpet_perRow;
-
-		if ($carpet_perRow == 0) $carpet_perRow = 1;
-		
-
 		if ($limit < 1)
 		{
 			return array();
@@ -200,7 +195,7 @@ abstract class ModuleCarpet extends \Module
 
 		while ($objCarpets->next())
 		{
-			$arrCarpets[] = $this->parseCarpet($objCarpets, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $carpet_perRow) == 0) ? ' last_col' : '') . ((($count % $carpet_perRow) == 1) ? ' first_col' : ''), $count);
+			$arrCarpets[] = $this->parseCarpet($objCarpets, $blnAddCategory, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : ''), $count);
 		}
 
 		return $arrCarpets;

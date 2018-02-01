@@ -7,7 +7,8 @@
 $GLOBALS['TL_DCA']['tl_module']['palettes']['carpet_detail']    = '{title_legend},name,headline,type;
                                                                    {category_legend},carpet_categories;
                                                                    {detail_legend},carpet_price,carpet_rating;
-                                                                   {template_legend:hide},carpet_template,customTpl,imgSize,fullsize;
+																   {template_legend:hide},carpet_template,customTpl,imgSize,fullsize;
+																   {related_legend},related_show,related_template,related_imgSize,carpetList_Class,related_Class;
                                                                    {protected_legend:hide},protected;
 																   {currency_legend},currency;
                                                                    {expert_legend:hide},guests,cssID,space';
@@ -15,7 +16,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['carpet_list']      = '{title_legend
                                                                    {category_legend},carpet_categories;
                                                                    {detail_legend},carpet_price,carpet_rating,carpet_detailModule;
                                                                    {config_legend},carpet_status,carpet_sortBy,numberOfItems,perPage,skipFirst;
-                                                                   {template_legend:hide},carpet_template,customTpl,imgSize,itemClass,carpet_perRow;
+                                                                   {template_legend:hide},carpet_template,customTpl,imgSize,carpetList_Class,carpet_Class;
                                                                    {protected_legend:hide},protected;
 																   {currency_legend},currency;
                                                                    {expert_legend:hide},guests,cssID,space';
@@ -23,7 +24,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['carpet_carousel']  = '{title_legend
                                                                    {category_legend},carpet_categories;
                                                                    {detail_legend},carpet_price,carpet_rating;
                                                                    {config_legend},carpet_status,carpet_sortBy,numberOfItems;
-                                                                   {template_legend:hide},carpet_template,customTpl,itemClass,imgSize;
+                                                                   {template_legend:hide},carpet_template,customTpl,carpet_Class,imgSize;
                                                                    {protected_legend:hide},protected;
                                                                    {expert_legend:hide},guests,cssID,space';
 
@@ -59,9 +60,17 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['carpet_template'] = array
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['itemClass'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['carpetList_Class'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['itemClass'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['carpetList_Class'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['carpet_Class'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['carpet_Class'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50 clr'),
@@ -105,16 +114,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['carpet_rating'] = array
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "char(1) NOT NULL default ''"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['carpet_perRow'] = array
-(
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['carpet_perRow'],
-	'default'              => '4',
-	'exclude'              => true,
-	'inputType'            => 'select',
-	'options'              => array('1','2','3','4','5','6','7','8','9','10','11','12'),
-	'eval'                 => array('tl_class'=>'w50'),
-    'sql'                  => "varchar(64) NOT NULL default ''"
-);
 $GLOBALS['TL_DCA']['tl_module']['fields']['currency'] = array
 (
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['currency'],
@@ -125,6 +124,42 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['currency'] = array
 	'reference'            => &$GLOBALS['TL_LANG']['currency'],
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['related_show'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_show'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array(),
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
+(
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['related_template'],
+	'default'              => 'product_related',
+	'exclude'              => true,
+	'inputType'            => 'select',
+	'options_callback'     => array('tl_module_product', 'getRelatedTemplates'),
+	'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['related_Class'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_Class'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['related_imgSize'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['related_imgSize'],
+	'exclude'                 => true,
+	'inputType'               => 'imageSize',
+	'options'                 => System::getImageSizes(),
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
 
@@ -146,7 +181,7 @@ class tl_module_carpets extends Backend
 	 */
 	public function getCarpetsTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('carpet_', $dc->activeRecord->pid);
+		return $this->getTemplateGroup('carpet_');
 	}
 
 	/**
