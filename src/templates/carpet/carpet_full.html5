@@ -1,0 +1,77 @@
+
+<div class="layout_full block carpet <?= $this->class; ?>">
+
+  <h2><?= $this->title; ?></h2>
+
+  <div class="meta">
+	  <?php if ($this->rateid): ?><div class="rate" id="rate-<?= $this->rateid; ?>"></div><?php endif; ?>
+	  <?php if ($this->carpets_date): ?><div class="date"><?= $this->date; ?></div><?php endif; ?>
+  </div>
+
+  <figure class="image_container<?= $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?= $this->margin; ?>"<?php endif; ?>>
+
+      <?php if ($this->href): ?>
+        <a href="<?= $this->href; ?>"<?= $this->attributes; ?> title="<?= $this->alt; ?>">
+      <?php endif; ?>
+
+      <?php $this->insert('picture_default', $this->picture); ?>
+
+      <?php if ($this->href): ?>
+        </a>
+      <?php endif; ?>
+
+      <?php if ($this->caption): ?>
+        <figcaption class="caption" style="width:<?= $this->arrSize[0]; ?>px"><?= $this->caption; ?></figcaption>
+      <?php endif; ?>
+
+      <div class="tag_container">
+          <?php if ($this->stock): ?><div class="tag tag-stock">آماده</div><?php endif; ?>
+          <?php if ($this->preparing): ?><div class="tag tag-preparing">آماده‌سازی</div><?php endif; ?>
+          <?php if ($this->bestseller): ?><div class="tag tag-bestseller">پرفروش</div><?php endif; ?>
+          <?php if ($this->new): ?><div class="tag tag-new">جدید</div><?php endif; ?>
+      </div>
+
+  </figure>
+
+ <table>
+  <tr class="code">
+    <th>کد نخ و نقشه</th><td><?= $this->alias; ?></td>
+  </tr>
+  <tr class="width">
+    <th>عرض</th><td><span><?= $this->widthcm; ?></span> سانتی‌متر (<span><?= $this->kwidth; ?></span> گره)</td>
+  </tr>
+  <tr class="height">
+    <th>ارتفاع</th><td><span><?= $this->heightcm; ?></span> سانتی‌متر (<span><?= $this->kheight; ?></span> گره)</td>
+  </tr>
+  <tr class="knots">
+    <th>رج‌شمار</th><td><span><?= $this->knots; ?> گره در 7 سانتی‌متر</span></td>
+  </tr>
+  <tr class="totalknots">
+    <th>تعداد گره کل</th><td><span><?= $this->totalknots; ?></span></td>
+  </tr>
+  <tr class="colors">
+    <th>تعداد رنگ‌ها</th><td><?= $this->colors; ?> رنگ</td>
+  </tr>
+  <tr class="silk">
+    <th>تعداد رنگ ابریشم</th><td><span><?= $this->silk; ?></span> رنگ</td>
+  </tr>
+ </table>
+
+  <?php if ($this->show_price): ?>
+  <p class="price">قیمت: <span><?= $this->price; ?></span> <?= $this->currency_string;?></p>
+  <?php endif; ?>
+
+
+  <?php if ($this->text): ?>
+  <div class="text">
+    <?= $this->text; ?>
+  </div>
+  <?php endif; ?>
+
+</div>
+
+<?php if ($this->rateid): ?>
+<script type="text/javascript">
+    $(function(){$.fn.raty.defaults.path= 'system/modules/carpets/assets/img';$('#rate-<?= $this->rateid; ?>').raty({readOnly:true,score:<?= $this->rate; ?>,number:5});});
+</script>
+<?php endif; ?>

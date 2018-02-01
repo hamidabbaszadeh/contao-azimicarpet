@@ -1,0 +1,21 @@
+<li class="block carpet <?= $this->class; ?>">
+
+  <figure class="image_container"<?php if ($this->margin): ?> style="<?= $this->margin; ?>"<?php endif; ?>>
+
+    <?php if ($this->link): ?>
+      <a href="<?= $this->link; ?>"<?php if ($this->linkTitle): ?> title="<?= $this->linkTitle; ?>"<?php endif; ?><?= $this->attributes; ?>>
+    <?php endif; ?>
+
+    <?php $this->insert('picture_default', $this->picture); ?>
+
+    <?php if ($this->link): ?>
+      </a>
+    <?php endif; ?>
+
+    <figcaption class="caption" style="width:<?= $this->arrSize[0]; ?>px">
+      <div class="title"><a href="<?= $this->link; ?>"><?= $this->title; ?> <br> کد: <?= $this->alias; ?></a></div>
+    </figcaption>
+
+  </figure>
+
+</li>

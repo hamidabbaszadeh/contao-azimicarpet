@@ -1,0 +1,63 @@
+
+<?php $this->extend('block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+
+<div class="carsousel_container">
+
+<div class="jcarousel" dir="rtl">
+  <ul>
+  <?php if (empty($this->carpets)): ?>
+    <p class="empty"><?php echo $this->empty; ?></p>
+  <?php else: ?>
+    <?php echo implode('', $this->carpets); ?>
+  <?php endif; ?>
+  </ul>
+</div>
+
+<a href="#" class="jcarousel-control-next">&lsaquo;</a>
+<a href="#" class="jcarousel-control-prev">&rsaquo;</a>
+
+</div>
+
+<script type="text/javascript">
+  (function($) {
+    $(function() {
+        $('.jcarousel')
+        .jcarousel({
+			animation: {duration: 800,easing:   'linear'},
+			wrap: 'circular'
+         })
+        .jcarouselAutoscroll({
+            interval: 3000,
+            target: '+=1',
+            autostart: true
+         });
+
+        $('.jcarousel-control-prev')
+            .on('jcarouselcontrol:active', function() {
+                $(this).removeClass('inactive');
+            })
+            .on('jcarouselcontrol:inactive', function() {
+                $(this).addClass('inactive');
+            })
+            .jcarouselControl({
+                target: '-=1'
+            });
+
+        $('.jcarousel-control-next')
+            .on('jcarouselcontrol:active', function() {
+                $(this).removeClass('inactive');
+            })
+            .on('jcarouselcontrol:inactive', function() {
+                $(this).addClass('inactive');
+            })
+            .jcarouselControl({
+                target: '+=1'
+            });
+    });
+  })(jQuery);
+</script>
+
+
+<?php $this->endblock(); ?>
