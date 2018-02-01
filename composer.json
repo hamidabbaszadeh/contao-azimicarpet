@@ -3,7 +3,7 @@
     "description": "Carpets for Contao",
     "keywords": ["contao", "carpet"],
     "type": "contao-module",
-    "homepage": "https://github.com/respinar/contao-azimicarpet",
+    "homepage": "https://github.com/hamidabbaszadeh/contao-azimicarpet",
     "license": "LGPL-3.0+",
     "authors": [
         {
@@ -14,7 +14,7 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/respinar/contao-azimicarpet/issues"
+        "issues": "https://github.com/hamidabbaszadeh/contao-azimicarpet/issues"
     },
     "require": {
         "php": ">=5.4",
