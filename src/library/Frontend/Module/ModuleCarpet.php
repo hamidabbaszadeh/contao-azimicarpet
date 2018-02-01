@@ -1,6 +1,19 @@
 <?php
 
-namespace Carpets;
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2018 Leo Feyer
+ *
+ * @package Carpets
+ * @link    https://respinar.com
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+namespace Respinar\Carpets;
+
+use Respinar\Carpets\Model\CarpetsModel;
+use Respinar\Carpets\Model\CarpetsCategoryModel;
 
 /**
  * Class ModuleCarpetReader

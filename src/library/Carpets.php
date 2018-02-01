@@ -14,7 +14,10 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace Carpets;
+namespace Respinar\Carpets;
+
+use Respinar\Carpets\Model\CarpetsModel;
+use Respinar\Carpets\Model\CarpetsCategoryModel;
 
 
 /**
