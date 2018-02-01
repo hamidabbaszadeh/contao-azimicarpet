@@ -44,7 +44,7 @@ array_insert($GLOBALS['FE_MOD'], 2, array
  * Register models
  */
 
-$GLOBALS['TL_MODELS']['tl_carpets']          = 'Respinar\Carpets\Model\CarpetModel';
+$GLOBALS['TL_MODELS']['tl_carpets']          = 'Respinar\Carpets\Model\CarpetsModel';
 $GLOBALS['TL_MODELS']['tl_carpets_category'] = 'Respinar\Carpets\Model\CarpetsCategoryModel'; 
 
 
