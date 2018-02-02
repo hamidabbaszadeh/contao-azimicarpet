@@ -71,8 +71,8 @@ class ModuleCarpetCarousel extends ModuleCarpet
 
         if (TL_MODE == 'FE')
 		{
-            $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/carpets/assets/jquery.jcarousel.min.js|static';
-            $GLOBALS['TL_CSS'][]        = 'system/modules/carpets/assets/jcarousel.css';
+            $GLOBALS['TL_JAVASCRIPT']['carpets'] = 'system/modules/azimicarpet/assets/jquery.jcarousel.min.js|static';
+            $GLOBALS['TL_CSS']['carpets']        = 'system/modules/azimicarpet/assets/jcarousel.css|static';
         }
 
 		return parent::generate();

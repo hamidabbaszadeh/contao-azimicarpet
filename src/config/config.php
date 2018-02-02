@@ -20,7 +20,7 @@ array_insert($GLOBALS['BE_MOD'], 1, array
 		'yarns' => array
 		(
 			'tables' => array('tl_carpets_category', 'tl_carpets'),
-			'icon'   => 'system/modules/carpets/assets/icon.png'
+			'icon'   => 'system/modules/azimicarpet/assets/icon.png'
 		)
 	)
 ));
