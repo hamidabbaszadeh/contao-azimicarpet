@@ -50,7 +50,7 @@ class ModuleCarpetDetail extends ModuleCarpet
 
 		if (TL_MODE == 'FE' and $this->carpet_rating)
 		{
-            $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/carpets/assets/jquery.raty.min.js|static';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/azimicarpet/assets/jquery.raty.min.js|static';
         }
 
         $this->carpet_categories = $this->sortOutProtected(deserialize($this->carpet_categories));
