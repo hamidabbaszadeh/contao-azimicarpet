@@ -56,14 +56,14 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 			'stock' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_carpets']['stock'],
-				'icon'                => 'system/modules/carpets/assets/stock.png',
+				'icon'                => 'system/modules/azimicarpet/assets/stock.png',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleStock(this,%s)"',
 				'button_callback'     => array('tl_carpets', 'toggleIconStock')
 			),
 			'preparing' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_carpets']['preparing'],
-				'icon'                => 'system/modules/carpets/assets/preparing.png',
+				'icon'                => 'system/modules/azimicarpet/assets/preparing.png',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.togglePreparing(this,%s)"',
 				'button_callback'     => array('tl_carpets', 'toggleIconPreparing')
 			),
@@ -449,7 +449,7 @@ class tl_carpets extends Backend
 
 		if (!$row['stock'])
 		{
-			$icon = 'system/modules/carpets/assets/stock_.png';
+			$icon = 'system/modules/azimicarpet/assets/stock_.png';
 		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
@@ -509,7 +509,7 @@ class tl_carpets extends Backend
 
 		if (!$row['preparing'])
 		{
-			$icon = 'system/modules/carpets/assets/preparing_.png';
+			$icon = 'system/modules/azimicarpet/assets/preparing_.png';
 		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
