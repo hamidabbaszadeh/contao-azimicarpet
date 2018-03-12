@@ -72,6 +72,6 @@
 
 <?php if ($this->rateid): ?>
 <script type="text/javascript">
-    $(function(){$.fn.raty.defaults.path= 'system/modules/carpets/assets/img';$('#rate-<?= $this->rateid; ?>').raty({readOnly:true,score:<?= $this->rate; ?>,number:5});});
+    $(function(){$.fn.raty.defaults.path= 'system/modules/azimicarpet/assets/img';$('#rate-<?= $this->rateid; ?>').raty({readOnly:true,score:<?= $this->rate; ?>,number:5});});
 </script>
 <?php endif; ?>
