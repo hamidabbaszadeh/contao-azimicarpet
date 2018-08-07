@@ -242,7 +242,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['colors'],
 			'exclude'                 => true,
-			'filter'                  => flase,
+			'filter'                  => false,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'digit', 'maxlength'=>3, 'tl_class'=>'w50'),
 			'sql'                     => "int(12) NOT NULL default '0'"
@@ -260,7 +260,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['silk'],
 			'exclude'                 => true,
-			'filter'                  => flase,
+			'filter'                  => false,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'digit', 'maxlength'=>3, 'tl_class'=>'w50'),
 			'sql'                     => "int(12) NOT NULL default '0'"
@@ -269,7 +269,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['price'],
 			'exclude'                 => true,
-			'filter'                  => flase,
+			'filter'                  => false,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
 			'sql'                     => "int(12) NOT NULL default '0'"
@@ -278,7 +278,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['price_2'],
 			'exclude'                 => true,
-			'filter'                  => flase,
+			'filter'                  => false,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
 			'sql'                     => "int(12) NOT NULL default '0'"
@@ -287,7 +287,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['price_3'],
 			'exclude'                 => true,
-			'filter'                  => flase,
+			'filter'                  => false,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
 			'sql'                     => "int(12) NOT NULL default '0'"
@@ -296,7 +296,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['price_4'],
 			'exclude'                 => true,
-			'filter'                  => flase,
+			'filter'                  => false,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
 			'sql'                     => "int(12) NOT NULL default '0'"
@@ -305,7 +305,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['price_sale'],
 			'exclude'                 => true,
-			'filter'                  => flase,
+			'filter'                  => false,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50' ,'load'=>'lazy'),
 			'sql'                     => "int(12) NOT NULL default '0'"
