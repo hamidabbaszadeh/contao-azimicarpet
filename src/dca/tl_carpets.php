@@ -106,7 +106,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('sale'),
-		'default'                     => '{title_legend},title,alias,date;{price_legend},price,sale;{image_legend},singleSRC,alt;{seo_legend:hide},description;{text_legend},text;{status_legend},stock,preparing,bestseller,feature;{properties_legend},knots,colors,kwidth,kheight,silk;{publish_legend},published,start,stop'
+		'default'                     => '{title_legend},title,alias,date;{price_legend},price,price_2,price_3,price_4,{sale_legend},sale;{image_legend},singleSRC,alt;{seo_legend:hide},description;{text_legend},text;{status_legend},stock,preparing,bestseller,feature;{properties_legend},knots,colors,kwidth,kheight,silk;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
@@ -217,7 +217,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50 m12','submitOnChange'=>true),
+			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50 m12 clr','submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'kwidth' => array
@@ -274,13 +274,40 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
 			'sql'                     => "int(12) NOT NULL default '0'"
 		),
+		'price_2' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['price_2'],
+			'exclude'                 => true,
+			'filter'                  => flase,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
+			'sql'                     => "int(12) NOT NULL default '0'"
+		),
+		'price_3' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['price_3'],
+			'exclude'                 => true,
+			'filter'                  => flase,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
+			'sql'                     => "int(12) NOT NULL default '0'"
+		),
+		'price_4' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['price_4'],
+			'exclude'                 => true,
+			'filter'                  => flase,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50'),
+			'sql'                     => "int(12) NOT NULL default '0'"
+		),
 		'price_sale' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['price_sale'],
 			'exclude'                 => true,
 			'filter'                  => flase,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50 clr' ,'load'=>'lazy'),
+			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50' ,'load'=>'lazy'),
 			'sql'                     => "int(12) NOT NULL default '0'"
 		),
 		'singleSRC' => array
