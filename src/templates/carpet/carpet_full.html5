@@ -58,7 +58,18 @@
  </table>
 
   <?php if ($this->show_price): ?>
-  <p class="price">قیمت: <span><?= $this->price; ?></span> <?= $this->currency_string;?></p>
+  <div class="price_list">
+    <p><span class="price_label">قیمت نخ و نقشه</span>: <span class="price"><?= $this->price; ?></span> <?= $this->currency_string;?></p>
+  <?php if($price_2): ?>
+    <p><span class="price_label">قیمت نخ و نقشه با چله ابریشم</span>: <span class="price"><?= $this->price_2; ?></span> <?= $this->currency_string;?></p>
+  <?php endif;?>
+  <?php if($price_3): ?>
+    <p><span class="price_label">قیمت نخ و نقشه و دار</span>: <span class="price"><?= $this->price_3; ?></span> <?= $this->currency_string;?></p>
+  <?php endif;?>
+  <?php if($price_4): ?>
+    <p><span class="price_label">قیمت نخ و نقشه با چله ابریشم و دار</span>: <span class="price"><?= $this->price_4; ?></span> <?= $this->currency_string;?></p>
+  <?php endif;?>
+  </div>
   <?php endif; ?>
 
 

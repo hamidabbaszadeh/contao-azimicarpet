@@ -39,6 +39,7 @@ $GLOBALS['TL_LANG']['tl_carpets']['price_sale']  = array('قیمت حراج', '�
 $GLOBALS['TL_LANG']['tl_carpets']['title_legend']      = 'نام و کد';
 $GLOBALS['TL_LANG']['tl_carpets']['properties_legend'] = 'خصوصیات';
 $GLOBALS['TL_LANG']['tl_carpets']['price_legend']      = 'قیمت';
+$GLOBALS['TL_LANG']['tl_carpets']['sale_legend']       = 'حراج';
 $GLOBALS['TL_LANG']['tl_carpets']['image_legend']      = 'تصویر';
 $GLOBALS['TL_LANG']['tl_carpets']['seo_legend']        = 'سئو';
 $GLOBALS['TL_LANG']['tl_carpets']['text_legend']       = 'توضیحات';

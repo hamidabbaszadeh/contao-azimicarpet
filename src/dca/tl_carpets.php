@@ -106,7 +106,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('sale'),
-		'default'                     => '{title_legend},title,alias,date;{price_legend},price,price_2,price_3,price_4,{sale_legend},sale;{image_legend},singleSRC,alt;{seo_legend:hide},description;{text_legend},text;{status_legend},stock,preparing,bestseller,feature;{properties_legend},knots,colors,kwidth,kheight,silk;{publish_legend},published,start,stop'
+		'default'                     => '{title_legend},title,alias,date;{price_legend},price,price_2,price_3,price_4,{sale_legend:hide},sale;{image_legend},singleSRC,alt;{seo_legend:hide},description;{text_legend},text;{status_legend},stock,preparing,bestseller,feature;{properties_legend},knots,colors,kwidth,kheight,silk;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
@@ -217,7 +217,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50 m12 clr','submitOnChange'=>true),
+			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50','submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'kwidth' => array

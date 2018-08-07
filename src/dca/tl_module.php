@@ -136,10 +136,10 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['related_show'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['related_template'] = array
 (
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['related_template'],
-	'default'              => 'product_related',
+	'default'              => 'carpet_related',
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_product', 'getRelatedTemplates'),
+	'options_callback'     => array('tl_module_carpets', 'getRelatedTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -179,9 +179,19 @@ class tl_module_carpets extends Backend
 	 * @param object
 	 * @return array
 	 */
-	public function getCarpetsTemplates(DataContainer $dc)
+	public function getCarpetsTemplates()
 	{
 		return $this->getTemplateGroup('carpet_');
+	}
+
+	/**
+	 * Return all related templates as array
+	 *
+	 * @return array
+	 */
+	public function getRelatedTemplates()
+	{
+		return $this->getTemplateGroup('related_');
 	}
 
 	/**
