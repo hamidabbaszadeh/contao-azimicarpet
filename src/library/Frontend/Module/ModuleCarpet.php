@@ -119,10 +119,18 @@ abstract class ModuleCarpet extends \Module
 			}
 
 			if ($this->currency == "TMN") {
-					$objCarpet->price = $objCarpet->price / 10;
+					$objCarpet->price   = $objCarpet->price   / 10;
+					$objCarpet->price_2 = $objCarpet->price_2 / 10;
+					$objCarpet->price_3 = $objCarpet->price_3 / 10;
+					$objCarpet->price_4 = $objCarpet->price_4 / 10;
 			}
 
-			$objTemplate->price = number_format($objCarpet->price);
+			$objTemplate->price   = number_format($objCarpet->price);
+
+			$objTemplate->price_2 = $objCarpet->price_2 ? number_format($objCarpet->price_2) : 0;
+			$objTemplate->price_3 = $objCarpet->price_3 ? number_format($objCarpet->price_3) : 0;
+			$objTemplate->price_4 = $objCarpet->price_4 ? number_format($objCarpet->price_4) : 0;
+
 			$objTemplate->show_price = $this->carpet_price;
 
 			$objTemplate->currency_string = $GLOBALS['TL_LANG']['MSC'][$this->currency];
