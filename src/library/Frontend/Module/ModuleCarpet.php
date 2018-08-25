@@ -118,6 +118,13 @@ abstract class ModuleCarpet extends \Module
 				$objCarpet->price = $objCarpet->price_sale;
 			}
 
+			$objCategory = CarpetsCategoryModel::findOneByPid($objCarpet->pid);
+
+			$objCarpet->price   = $objCarpet->price   * (1 + $objCategory->price_1_inc /100);
+			$objCarpet->price_2 = $objCarpet->price_2 * (1 + $objCategory->price_2_inc /100);
+			$objCarpet->price_3 = $objCarpet->price_3 * (1 + $objCategory->price_3_inc /100);
+			$objCarpet->price_4 = $objCarpet->price_4 * (1 + $objCategory->price_4_inc /100);
+
 			if ($this->currency == "TMN") {
 					$objCarpet->price   = $objCarpet->price   / 10;
 					$objCarpet->price_2 = $objCarpet->price_2 / 10;
