@@ -88,7 +88,7 @@ $GLOBALS['TL_DCA']['tl_carpets_category'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('protected'),
-		'default'                     => '{title_legend},title,jumpTo;{protected_legend:hide},protected;'
+		'default'                     => '{title_legend},title,jumpTo;{price_increase_legend},price_1_inc,price_2_inc,price_3_inc,price_4_inc;{protected_legend:hide},protected;'
 	),
 
 	// Subpalettes
@@ -126,6 +126,42 @@ $GLOBALS['TL_DCA']['tl_carpets_category'] = array
 			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio','tl_class'=>'clr'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
+		),
+		'price_1_inc' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets_category']['price_1_inc'],
+			'exclude'                 => true,
+			'filter'                  => false,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>4, 'tl_class'=>'w50'),
+			'sql'                     => "int(4) NOT NULL default '0'"
+		),
+		'price_2_inc' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets_category']['price_2_inc'],
+			'exclude'                 => true,
+			'filter'                  => false,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>4, 'tl_class'=>'w50'),
+			'sql'                     => "int(4) NOT NULL default '0'"
+		),
+		'price_3_inc' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets_category']['price_3_inc'],
+			'exclude'                 => true,
+			'filter'                  => false,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>4, 'tl_class'=>'w50'),
+			'sql'                     => "int(4) NOT NULL default '0'"
+		),
+		'price_4_inc' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets_category']['price_4_inc'],
+			'exclude'                 => true,
+			'filter'                  => false,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>4, 'tl_class'=>'w50'),
+			'sql'                     => "int(4) NOT NULL default '0'"
 		),
 		'protected' => array
 		(
