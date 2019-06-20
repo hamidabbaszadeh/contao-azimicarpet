@@ -51,7 +51,7 @@ class Carpets extends \Frontend
 		$arrProcessed = array();
 
 		// Get all catalog categories
-		$objCategory = \CarpetsCategoryModel::findByProtected('');
+		$objCategory = CarpetsCategoryModel::findByProtected('');
 
 		// Walk through each archive
 		if ($objCategory !== null)
@@ -112,7 +112,7 @@ class Carpets extends \Frontend
 				$strUrl = $arrProcessed[$objCategory->jumpTo];
 
 				// Get the items
-				$objCarpet = \CarpetsModel::findPublishedByPid($objCategory->id);
+				$objCarpet = CarpetsModel::findPublishedByPid($objCategory->id);
 
 				if ($objCarpet !== null)
 				{
