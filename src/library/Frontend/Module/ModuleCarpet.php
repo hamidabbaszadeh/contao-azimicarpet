@@ -88,13 +88,24 @@ abstract class ModuleCarpet extends \Module
 		$objTemplate = new \FrontendTemplate($this->carpet_template);
 		$objTemplate->setData($objCarpet->row());
 
+		$objTemplate->meta_price_txt   = $GLOBALS['TL_LANG']['MSC']['price_text'];
+		$objTemplate->meta_brand_txt   = $GLOBALS['TL_LANG']['MSC']['brand'];
+		$objTemplate->meta_model_txt   = $GLOBALS['TL_LANG']['MSC']['model'];
+		$objTemplate->meta_global_ID_txt = $GLOBALS['TL_LANG']['MSC']['global_ID'];
+		$objTemplate->meta_sku_txt     = $GLOBALS['TL_LANG']['MSC']['sku'];		
+		$objTemplate->meta_status_txt  = $GLOBALS['TL_LANG']['MSC']['status'];
+
+		$objTemplate->meta_vote_txt    = $GLOBALS['TL_LANG']['MSC']['vote'];
+
+		$objTemplate->meta_availability_txt = $GLOBALS['TL_LANG']['MSC'][$objCarpet->availability];
+
+
 		$objTemplate->class = (($this->carpet_Class != '') ? ' ' . $this->carpet_Class : '') . $strClass;
 
 		if (time() - $objCarpet->date < 2592000)
 			$objTemplate->new = true;
 
-		if ($this->carpet_rating) {
-			$objTemplate->rate   = $objCarpet->visit / 10;
+		if ($this->carpet_rating) {			
 			$objTemplate->rateid = $this->generateRandomString();
 		}
 
@@ -108,7 +119,7 @@ abstract class ModuleCarpet extends \Module
 			$objTemplate->heightcm = '-';
 		}
 
-
+		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objCarpet->date);
 
 		if ($this->carpet_price)
 		{
@@ -132,15 +143,16 @@ abstract class ModuleCarpet extends \Module
 					$objCarpet->price_4 = $objCarpet->price_4 / 10;
 			}
 
-			$objTemplate->price   = number_format($objCarpet->price);
+			$objTemplate->n_price   = number_format($objCarpet->price);
 
-			$objTemplate->price_2 = $objCarpet->price_2 ? number_format($objCarpet->price_2) : 0;
-			$objTemplate->price_3 = $objCarpet->price_3 ? number_format($objCarpet->price_3) : 0;
-			$objTemplate->price_4 = $objCarpet->price_4 ? number_format($objCarpet->price_4) : 0;
+			$objTemplate->n_price_2 = $objCarpet->price_2 ? number_format($objCarpet->price_2) : 0;
+			$objTemplate->n_price_3 = $objCarpet->price_3 ? number_format($objCarpet->price_3) : 0;
+			$objTemplate->n_price_4 = $objCarpet->price_4 ? number_format($objCarpet->price_4) : 0;
 
 			$objTemplate->show_price = $this->carpet_price;
 
 			$objTemplate->currency_string = $GLOBALS['TL_LANG']['MSC'][$this->currency];
+			$objTemplate->priceValidUntil = date('Y-m-d\TH:i:sP', $objProduct->priceValidUntil);
 
 		}
 
@@ -156,14 +168,7 @@ abstract class ModuleCarpet extends \Module
 		{
 			$objModel = \FilesModel::findByUuid($objCarpet->singleSRC);
 
-			if ($objModel === null)
-			{
-				if (!\Validator::isUuid($objCarpet->singleSRC))
-				{
-					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-			}
-			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			if ($objModel !== null && is_file(\System::getContainer()->getParameter('kernel.project_dir') . '/' . $objModel->path))			
 			{
 				// Do not override the field now that we have a model registry (see #6303)
 				$arrCarpet = $objCarpet->row();
@@ -171,18 +176,26 @@ abstract class ModuleCarpet extends \Module
 				// Override the default image size
 				if ($this->imgSize != '')
 				{
-					$size = deserialize($this->imgSize);
+					$size = \StringUtil::deserialize($this->imgSize);
 
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
 						$arrCarpet['size'] = $this->imgSize;
 					}
 				}
+				
+				$arrCarpet['singleSRC'] = $objModel->path;		
+				
+				// Link to the product detail if no image link has been defined		
+				$picture = $objTemplate->picture;
+				unset($picture['title']);
+				$objTemplate->picture = $picture;
 
-				$arrCarpet['singleSRC'] = $objModel->path;
-				$strLightboxId = 'lightbox[lb' . $this->id . ']';
-				$arrCarpet['fullsize'] = $this->fullsize;
-				$this->addImageToTemplate($objTemplate, $arrCarpet,null, $strLightboxId);
+				$objTemplate->href = $objTemplate->link;
+				$objTemplate->linkTitle = \StringUtil::specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['moreDetail'], $objCarpet->title), true);
+				
+				$this->addImageToTemplate($objTemplate, $arrCarpet, null, null, $objModel);
+
 			}
 		}
 

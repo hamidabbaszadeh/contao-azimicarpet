@@ -1,5 +1,8 @@
 <?php
 
+System::loadLanguageFile('tl_content');
+
+
 /**
  * Table tl_carpets
  */
@@ -105,14 +108,15 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('sale'),
-		'default'                     => '{title_legend},title,alias,date;{price_legend},price,price_2,price_3,price_4;{sale_legend:hide},sale;{image_legend},singleSRC,alt;{seo_legend:hide},description;{text_legend},text;{status_legend},stock,preparing,bestseller,feature;{properties_legend},knots,colors,kwidth,kheight,silk;{publish_legend},published,start,stop'
+		'__selector__'                => array('sale','overwriteMeta'),
+		'default'                     => '{title_legend},title,alias,date;{image_legend},singleSRC,overwriteMeta;{product_legend},brand,model,sku,global_ID;{price_legend},price,price_2,price_3,price_4,availability,priceValidUntil;{sale_legend:hide},sale;{seo_legend:hide},description;{text_legend},text;{status_legend},stock,preparing,bestseller,feature;{properties_legend},knots,colors,kwidth,kheight,silk;{rating_legend},rating_value,rating_count;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
 		'sale'                   => 'price_sale',
+		'overwriteMeta'          => 'alt,imageTitle'
 	),
 
 		// Fields
@@ -135,11 +139,7 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 		'tstamp' => array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
-		),
-		'visit' => array
-		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
-		),
+		),		
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['title'],
@@ -148,6 +148,10 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'visit' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'date' => array
 		(
@@ -167,8 +171,59 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>6, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(6) NOT NULL default ''"
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>12, 'tl_class'=>'w50 clr'),
+			'sql'                     => "varchar(12) NOT NULL default ''"
+		),
+		'brand' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['brand'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'sorting'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'model' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['model'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'sorting'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'global_ID' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['global_ID'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'sorting'                 => true,
+			'options'				  => array('mpn','isbn','gtin8','gtin12','gtin13','gtin14'),
+			'inputType'               => 'inputUnit',
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'eval'                    => array('includeBlankOption'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'sku' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['sku'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'sorting'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'availability' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['availability'],
+			'inputType'               => 'select',
+			'options'                 => array('Discontinued','InStock','LimitedAvailability','OutOfStock','PreOrder','PreSale','SoldOut'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'stock' => array
 		(
@@ -310,6 +365,26 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 			'eval'                    => array('mandatory'=>true,'rgxp'=>'digit', 'maxlength'=>12, 'tl_class'=>'w50' ,'load'=>'lazy'),
 			'sql'                     => "int(12) NOT NULL default '0'"
 		),
+		'priceValidUntil' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['priceValidUntil'],
+			'default'                 => time(),
+			'exclude'                 => true,
+			'filter'                  => true,
+			'flag'                    => 8,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'availability' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['availability'],
+			'inputType'               => 'select',
+			'options'                 => array('Discontinued','InStock','InStoreOnly','LimitedAvailability','OnlineOnly','OutOfStock','PreOrder','PreSale','SoldOut'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
 		'singleSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['singleSRC'],
@@ -318,13 +393,30 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
 			'sql'                     => "binary(16) NULL"
 		),
-		'alt' => array
+		'overwriteMeta' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['alt'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['overwriteMeta'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50 clr'),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'imageTitle' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imageTitle'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long'),
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'alt' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['alt'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'description' => array
@@ -344,6 +436,34 @@ $GLOBALS['TL_DCA']['tl_carpets'] = array
 			'inputType'               => 'textarea',
 			'eval'                    => array('rte'=>'tinyMCE'),
 			'sql'                     => "text NULL"
+		),
+		'rating_value' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['rating_value'],
+			'exclude'                 => true,
+			'filter'                  => false,
+			'sorting'                 => true,			
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit','doNotCopy'=>true,'tl_class'=>'w50'),
+			'sql'                     => "varchar(10) NOT NULL default '0'"
+		),
+		'rating_count' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['rating_count'],
+			'exclude'                 => true,
+			'filter'                  => false,
+			'sorting'                 => true,			
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit','doNotCopy'=>true,'tl_class'=>'w50'),
+			'sql'                     => "int(10) NOT NULL default '0'"
+		),
+		'related' => array(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_carpets']['related'],
+			'exclude'                 => false,
+			'inputType'               => 'checkbox',
+			'options_callback'        => array('tl_carpets', 'getCarpets'),
+			'eval'                    => array('includeBlankOption'=>true,'multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'published' => array
 		(
@@ -576,6 +696,38 @@ class tl_carpets extends Backend
 
 		$this->createNewVersion('tl_carpets', $intId);
 
+	}
+
+	/**
+	 * Get records from the master category
+	 *
+	 * @param	DataContainer
+	 * @return	array
+	 * @link	http://www.contao.org/callbacks.html#options_callback
+	 */
+	public function getCarpets(DataContainer $dc)
+	{
+
+		$objItems = $this->Database->prepare("SELECT * FROM tl_carpets WHERE pid=? ORDER BY date DESC")->execute($dc->activeRecord->pid);
+
+		while( $objItems->next() )
+		{
+			if ($objItems->id !== $dc->activeRecord->id) {
+
+				$arrItems[$objItems->id] = $objItems->title;
+
+				if($objItems->model) {
+					$arrItems[$objItems->id] .= ' [model: ' . $objItems->model .']';
+				}
+
+				if ($objItems->sku) {
+					$arrItems[$objItems->id] .= ' (sku: ' . $objItems->sku .')';
+				} 				
+				
+			}
+		}
+
+		return $arrItems;
 	}
 
 }

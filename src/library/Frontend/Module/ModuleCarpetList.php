@@ -62,11 +62,12 @@ class ModuleCarpetList extends ModuleCarpet
 		if ($this->carpet_detailModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
 		{
 			return $this->getFrontendModule($this->carpet_detailModule, $this->strColumn);
-		}
-
-		if (TL_MODE == 'FE' and $this->carpet_rating)
+		}		
+		
+		if (TL_MODE == 'FE')
 		{
-            $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/azimicarpet/assets/jquery.raty.min.js|static';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/azimicarpet/assets/vendor/rateit/jquery.rateit.min.js|static';
+            $GLOBALS['TL_CSS'][] = 'system/modules/azimicarpet/assets/vendor/rateit/rateit.css|static';
         }
 
 		return parent::generate();

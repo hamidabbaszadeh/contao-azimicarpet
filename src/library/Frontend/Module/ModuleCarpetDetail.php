@@ -47,10 +47,11 @@ class ModuleCarpetDetail extends ModuleCarpet
 
 			return $objTemplate->parse();
 		}
-
-		if (TL_MODE == 'FE' and $this->carpet_rating)
+		
+		if (TL_MODE == 'FE')
 		{
-            $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/azimicarpet/assets/jquery.raty.min.js|static';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/azimicarpet/assets/vendor/rateit/jquery.rateit.min.js|static';
+            $GLOBALS['TL_CSS'][] = 'system/modules/azimicarpet/assets/vendor/rateit/rateit.css|static';
         }
 
         $this->carpet_categories = $this->sortOutProtected(deserialize($this->carpet_categories));

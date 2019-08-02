@@ -1,37 +1,40 @@
 
-<div class="carpet_full <?= $this->class; ?>">
+<div itemscope itemtype="http://schema.org/Product" class="carpet_full <?= $this->class; ?>">
 
-  <h2><?= $this->title; ?></h2>
+  <h1 itemprop="name"><?= $this->title; ?></h1>
 
   <div class="meta">
-	  <?php if ($this->rateid): ?><div class="rate" id="rate-<?= $this->rateid; ?>"></div><?php endif; ?>
+
+    <time datetime="<?= $this->datetime; ?>"></time>
+
+    <span class="brand"><?= $this->meta_brand_txt; ?>: <span itemprop="brand"><?= $this->brand; ?></span></span>
+    <span class="model"><?= $this->meta_model_txt; ?>: <span><?= $this->model; ?></span></span>
+    <span class="sku"><?= $this->meta_sku_txt; ?>: <span itemprop="sku"><?= $this->sku; ?></span></span>
+    <span class="global_ID"><?= $this->meta_global_ID_txt; ?>: <span itemprop="<?= $this->meta_global_ID['unit']; ?>"><?= $this->global_ID['value']; ?></span></span>
+	  
 	  <?php if ($this->carpets_date): ?><div class="date"><?= $this->date; ?></div><?php endif; ?>
+
+    <div class="rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+        <span class="rateit ltr" itemprop="ratingValue" content="<?= $this->rating_value; ?>" data-rateit-value="<?= $this->rating_value; ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></span>      
+        <span class="ratingcount" itemprop="ratingCount" content="<?= $this->rating_count; ?>">(<?= $this->rating_count; ?> <?= $this->meta_vote_txt; ?>)</span>
+        <meta itemprop="bestRating" content="5">        
+    </div>
+
   </div>
 
-  <figure class="image_container<?= $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?= $this->margin; ?>"<?php endif; ?>>
 
-      <?php if ($this->href): ?>
-        <a href="<?= $this->href; ?>"<?= $this->attributes; ?> title="<?= $this->alt; ?>">
-      <?php endif; ?>
+  <?php if ($this->addImage): ?>
+    <?php $this->insert('image', $this->arrData); ?>
+  <?php endif; ?>
 
-      <?php $this->insert('picture_default', $this->picture); ?>
+  <div class="tag_container">
+    <?php if ($this->stock): ?><div class="tag tag-stock">آماده</div><?php endif; ?>
+    <?php if ($this->preparing): ?><div class="tag tag-preparing">آماده‌سازی</div><?php endif; ?>
+    <?php if ($this->bestseller): ?><div class="tag tag-bestseller">پرفروش</div><?php endif; ?>
+    <?php if ($this->new): ?><div class="tag tag-new">جدید</div><?php endif; ?>
+  </div>
+    
 
-      <?php if ($this->href): ?>
-        </a>
-      <?php endif; ?>
-
-      <?php if ($this->caption): ?>
-        <figcaption class="caption" style="width:<?= $this->arrSize[0]; ?>px"><?= $this->caption; ?></figcaption>
-      <?php endif; ?>
-
-      <div class="tag_container">
-          <?php if ($this->stock): ?><div class="tag tag-stock">آماده</div><?php endif; ?>
-          <?php if ($this->preparing): ?><div class="tag tag-preparing">آماده‌سازی</div><?php endif; ?>
-          <?php if ($this->bestseller): ?><div class="tag tag-bestseller">پرفروش</div><?php endif; ?>
-          <?php if ($this->new): ?><div class="tag tag-new">جدید</div><?php endif; ?>
-      </div>
-
-  </figure>
 
  <table>
   <tr class="code">
@@ -57,26 +60,31 @@
   </tr>
  </table>
 
+
   <?php if ($this->show_price): ?>
-  <div class="price_list">
-    <p><span class="price_label">قیمت نخ و نقشه</span><span class="price"><?= $this->price; ?></span> <?= $this->currency_string;?></p>
-  <?php if($this->price_2): ?>
-    <p><span class="price_label">قیمت نخ و نقشه همراه با دار چله کشی شده با چله پنبه اماده بافت</span><span class="price"><?= $this->price_2; ?></span> <?= $this->currency_string;?></p>
-  <?php endif;?>
-  <?php if($this->price_3): ?>
-    <p><span class="price_label">قیمت نخ و نقشه همراه با چله ابریشمابریشم</span><span class="price"><?= $this->price_3; ?></span> <?= $this->currency_string;?></p>
-  <?php endif;?>
-  <?php if($this->price_4): ?>
-    <p><span class="price_label">قیمت نخ و نقشه همراه با دار چله کشی شده با چله ابریشم اماده بافتدار</span><span class="price"><?= $this->price_4; ?></span> <?= $this->currency_string;?></p>
-  <?php endif;?>
+  <div class="offers" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <div class="price_list">
+      <p><span class="price_label">قیمت نخ و نقشه</span><span itemprop="price" content="<?= $this->price; ?>" class="price"> <?= $this->n_price; ?></span> <span itemprop="priceCurrency" content="RLS"><?= $this->currency_string;?></span></p>
+      <?php if($this->price_2): ?>
+        <p><span class="price_label">قیمت نخ و نقشه همراه با دار چله کشی شده با چله پنبه اماده بافت</span><span class="price"> <?= $this->n_price_2; ?></span> <?= $this->currency_string;?></p>
+      <?php endif;?>
+      <?php if($this->price_3): ?>
+        <p><span class="price_label">قیمت نخ و نقشه همراه با چله ابریشم</span><span class="price"> <?= $this->n_price_3; ?></span> <?= $this->currency_string;?></p>
+      <?php endif;?>
+      <?php if($this->price_4): ?>
+        <p><span class="price_label">قیمت نخ و نقشه همراه با دار چله کشی شده با چله ابریشم اماده بافتدار</span><span class="price"> <?= $this->n_price_4; ?></span> <?= $this->currency_string;?></p>
+      <?php endif;?>
+      </div>
+      <span itemprop="priceCurrency" content="RLS"></span>
+      <meta itemprop="priceValidUntil" content="<?= $this->priceValidUntil; ?>">   
+      <span class="availability"> (<link itemprop="availability" href="http://schema.org/<?= $this->availability; ?>"><?= $this->meta_availability_txt; ?>) </span> 
+      <a itemprop="url" href="http://azimicarpet.ir/contact" class="hyperlink_txt" title="خرید" >خرید</a>
   </div>
   <?php endif; ?>
 
 
   <?php if ($this->text): ?>
-  <div class="text">
-    <?= $this->text; ?>
-  </div>
+    <div class="text" itemprop="description"><?= $this->text; ?></div>
   <?php endif; ?>
 
 </div>
